@@ -1,0 +1,124 @@
+{
+  "kind": "singleType",
+  "collectionName": "landing_pages",
+  "info": {
+    "singularName": "landing-page",
+    "pluralName": "landing-pages",
+    "displayName": "Landing Page",
+    "description": "Mahfazty CIBC Landing Page content including header configuration"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "logoText": {
+      "type": "string",
+      "required": true,
+      "default": "MAHFAZTY",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "logoImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "navLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "navigation.link"
+    },
+    "companyLogos": {
+      "type": "component",
+      "repeatable": true,
+      "component": "navigation.company-logo"
+    },
+    "downloadText": {
+      "type": "string",
+      "required": true,
+      "default": "Download App",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "downloadLink": {
+      "type": "string",
+      "required": true,
+      "default": "#download",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "heroTitle": {
+      "type": "string",
+      "required": true,
+      "default": "Stay in control when the market moves.",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "heroDescription": {
+      "type": "text",
+      "required": true,
+      "default": "A focused investing experience for people at every stage, whether you are building confidence, staying active, or making faster decisions with clarity.",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "heroPrimaryBtnText": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "heroPrimaryBtnLink": {
+      "type": "string",
+      "required": false,
+      "default": "https://apps.apple.com/",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "heroSecondaryBtnText": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "heroImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}
