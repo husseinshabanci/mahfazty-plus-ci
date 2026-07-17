@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mahfazty Plus</title>
+    <script>
+        if ("scrollRestoration" in history) {
+            history.scrollRestoration = "manual";
+        }
+        window.scrollTo(0, 0);
+    </script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -38,9 +44,182 @@
         </main>
     </div>
 
-    <section class="blank-section" aria-hidden="true"></section>
+    <section class="process-section fade-in-up" id="process">
+        <div class="container process-shell">
+            <div class="process-copy">
+                <h2 class="process-title">Follow the app from top to bottom in three simple steps.</h2>
+                <p class="process-description">A roadmap-style walkthrough with a small iPhone mockup for each step, alternating left and right so the flow feels clear and polished.</p>
+            </div>
+            <div class="roadmap-spine" aria-hidden="true">
+                <span class="roadmap-spine-fill"></span>
+            </div>
+            <div class="process-timeline roadmap" aria-label="App usage steps">
+                <article class="process-step roadmap-step reveal-item">
+                    <div class="roadmap-copy">
+                        <h3>Sign up</h3>
+                        <p>Create your account, confirm your details, and get access to the app in a few guided taps.</p>
+                    </div>
+                    <div class="roadmap-marker" aria-hidden="true">
+                        <span>1</span>
+                    </div>
+                    <div class="roadmap-phone" aria-hidden="true">
+                        <div class="roadmap-phone-shadow"></div>
+                        <div class="roadmap-phone-frame">
+                            <div class="roadmap-phone-notch"></div>
+                            <div class="roadmap-phone-screen roadmap-screen-signup">
+                                <div class="roadmap-screen-header">
+                                    <span class="roadmap-chip">9:41</span>
+                                    <span class="roadmap-signal"></span>
+                                </div>
+                                <div class="roadmap-screen-card">
+                                    <span class="roadmap-screen-label">Create profile</span>
+                                    <strong>Start your journey</strong>
+                                </div>
+                                <div class="roadmap-screen-stack">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <article class="process-step roadmap-step roadmap-step-reverse reveal-item">
+                    <div class="roadmap-copy">
+                        <h3>Fund your account</h3>
+                        <p>Add money securely, choose your source, and prepare your balance for investing.</p>
+                    </div>
+                    <div class="roadmap-marker" aria-hidden="true">
+                        <span>2</span>
+                    </div>
+                    <div class="roadmap-phone" aria-hidden="true">
+                        <div class="roadmap-phone-shadow"></div>
+                        <div class="roadmap-phone-frame">
+                            <div class="roadmap-phone-notch"></div>
+                            <div class="roadmap-phone-screen roadmap-screen-fund">
+                                <div class="roadmap-screen-header">
+                                    <span class="roadmap-chip">9:41</span>
+                                    <span class="roadmap-signal"></span>
+                                </div>
+                                <div class="roadmap-screen-card">
+                                    <span class="roadmap-screen-label">Add funds</span>
+                                    <strong>Deposit securely</strong>
+                                </div>
+                                <div class="roadmap-screen-bars">
+                                    <span style="width: 68%"></span>
+                                    <span style="width: 84%"></span>
+                                    <span style="width: 56%"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <article class="process-step roadmap-step reveal-item">
+                    <div class="roadmap-copy">
+                        <h3>Start investing</h3>
+                        <p>Browse assets, compare opportunities, and place your first order with clarity.</p>
+                    </div>
+                    <div class="roadmap-marker" aria-hidden="true">
+                        <span>3</span>
+                    </div>
+                    <div class="roadmap-phone" aria-hidden="true">
+                        <div class="roadmap-phone-shadow"></div>
+                        <div class="roadmap-phone-frame">
+                            <div class="roadmap-phone-notch"></div>
+                            <div class="roadmap-phone-screen roadmap-screen-invest">
+                                <div class="roadmap-screen-header">
+                                    <span class="roadmap-chip">9:41</span>
+                                    <span class="roadmap-signal"></span>
+                                </div>
+                                <div class="roadmap-screen-card">
+                                    <span class="roadmap-screen-label">Market view</span>
+                                    <strong>Place your first trade</strong>
+                                </div>
+                                <div class="roadmap-screen-grid">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
 
-    <section class="download-section" id="download">
+    <section class="confidence-section fade-in-up" id="confidence">
+        <div class="container confidence-shell">
+            <div class="confidence-copy">
+                <h2 class="confidence-title">We work hard to keep your account, data, and access protected.</h2>
+            </div>
+            <div class="confidence-grid">
+                <article class="confidence-card">
+                    <div class="confidence-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 2l7 3v6c0 5.25-3.4 9.93-7 11-3.6-1.07-7-5.75-7-11V5l7-3z" />
+                            <path d="M9.2 12.2l1.95 1.95L15.1 10.2" />
+                        </svg>
+                    </div>
+                    <h3>Account security</h3>
+                    <p>We keep your account protected with careful login and transaction safeguards.</p>
+                </article>
+                <article class="confidence-card">
+                    <div class="confidence-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4.5 12h15" />
+                            <path d="M12 4.5v15" />
+                            <path d="M7 8.5l10 10" />
+                        </svg>
+                    </div>
+                    <h3>Protective controls</h3>
+                    <p>Transparent account controls help prevent unauthorized activity.</p>
+                </article>
+                <article class="confidence-card">
+                    <div class="confidence-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 3l7 4v5c0 4.9-3.2 9.2-7 10-3.8-.8-7-5.1-7-10V7l7-4z" />
+                            <path d="M12 11v4" />
+                            <path d="M12 16.8h.01" />
+                        </svg>
+                    </div>
+                    <h3>Strong verification</h3>
+                    <p>Multi-step verification helps keep access tied to the right person.</p>
+                </article>
+                <article class="confidence-card">
+                    <div class="confidence-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4 12h4l2-3 3 6 2-4h5" />
+                            <path d="M5 19h14" />
+                            <path d="M6.5 19V9" />
+                            <path d="M17.5 19V9" />
+                        </svg>
+                    </div>
+                    <h3>Always available</h3>
+                    <p>Support and guidance that stays close when you need it most.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="ready-section fade-in-up" id="ready">
+        <div class="container ready-shell">
+            <div class="ready-marquee" aria-hidden="true">
+                <div class="ready-marquee-track"></div>
+            </div>
+            <div class="ready-copy ready-copy-centered">
+                <p class="ready-kicker">Ready to start investing?</p>
+                <h2 class="ready-title">Open your account and get access to a cleaner way to invest.</h2>
+                <p class="ready-description">Move from exploring to acting with a mobile-first experience built for clarity, control, and steady progress.</p>
+                <div class="ready-actions">
+                    <a href="#download" class="btn btn-primary ready-primary">Start Investing</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="download-section fade-in-up" id="download">
         <div class="container download-content">
             <div class="download-copy">
                 <h2 class="download-catchphrase" id="download-title">Trade when you're ready, from wherever you're working.</h2>
@@ -73,24 +252,7 @@
         </div>
     </section>
 
-    <section class="ready-section fade-in-up" id="ready">
-        <div class="container ready-shell">
-            <div class="ready-marquee" aria-hidden="true">
-                <div class="ready-marquee-track"></div>
-            </div>
-            <div class="ready-copy ready-copy-centered">
-                <p class="ready-kicker">Ready to start investing?</p>
-                <h2 class="ready-title">Open your account and get access to a cleaner way to invest.</h2>
-                <p class="ready-description">Move from exploring to acting with a mobile-first experience built for clarity, control, and steady progress.</p>
-                <div class="ready-actions">
-                    <a href="#download" class="btn btn-primary ready-primary">Start Investing</a>
-                </div>
-            </div>
-        </div>
-        </div>
-    </section>
-
-    <footer class="footer-section">
+    <footer class="footer-section fade-in-up">
         <div class="container footer-grid">
             <div class="footer-brand">
                 <a href="#" class="logo footer-logo">

@@ -17,10 +17,14 @@ body {
     overflow-x: hidden;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
 }
 
 /* Hero Section Wrapper */
@@ -278,10 +282,508 @@ nav {
     box-shadow: 0 12px 30px rgba(29, 143, 227, 0.42);
 }
 
-.blank-section {
+.process-section {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(4rem, 6vw, 6rem) 2rem;
+    background:
+        linear-gradient(180deg, #ffffff 0%, #f7fbff 68%, #2c8eed 100%);
+}
+
+.process-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 34%),
+        radial-gradient(circle at 80% 0%, rgba(44, 142, 237, 0.12) 0%, rgba(44, 142, 237, 0) 32%);
+    pointer-events: none;
+}
+
+.process-shell {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.process-section.fade-in-up {
+    transform: translateY(42px);
+}
+
+.roadmap-spine {
+    position: absolute;
+    left: 50%;
+    top: 12.5rem;
+    bottom: 4rem;
+    width: 2px;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.16);
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.roadmap-spine-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
-    height: 140px;
-    background: #ffffff;
+    height: var(--spine-progress, 0%);
+    border-radius: inherit;
+    background: linear-gradient(180deg, #1d8fe3 0%, #0f62c9 100%);
+    transition: height 180ms ease-out;
+}
+
+.process-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    max-width: 760px;
+}
+
+.process-title {
+    font-size: clamp(2.5rem, 4vw, 4.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.process-description {
+    max-width: 64ch;
+    font-size: 1.08rem;
+    line-height: 1.75;
+    color: #0f172a;
+}
+
+.process-timeline {
+    width: 100%;
+    display: grid;
+    gap: 4rem;
+}
+
+.roadmap-step {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 88px minmax(0, 1fr);
+    gap: 2rem;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.roadmap-step-reverse {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.roadmap-step-reverse .roadmap-copy {
+    order: 3;
+}
+
+.roadmap-step-reverse .roadmap-marker {
+    order: 2;
+}
+
+.roadmap-step-reverse .roadmap-phone {
+    order: 1;
+}
+
+.roadmap-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 0 1.25rem;
+}
+
+.roadmap-marker {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.roadmap-marker span {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #1d8fe3 0%, #0f62c9 100%);
+    border: 0;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 800;
+    box-shadow: 0 12px 24px rgba(29, 143, 227, 0.22);
+    z-index: 2;
+}
+
+.roadmap-step.is-active .roadmap-marker span {
+    box-shadow: 0 0 0 6px rgba(29, 143, 227, 0.14), 0 16px 34px rgba(29, 143, 227, 0.22);
+}
+
+.roadmap-step.is-active .roadmap-phone {
+    animation: phonePulse 900ms ease;
+}
+
+.confidence-section {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(4.5rem, 6vw, 6.5rem) 2rem;
+    background:
+        linear-gradient(180deg, #2c8eed 0%, #f9fcff 44%, #ffffff 100%);
+}
+
+.confidence-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(44, 142, 237, 0.18) 0%, rgba(255, 255, 255, 0) 34%),
+        radial-gradient(circle at 88% 0%, rgba(15, 23, 42, 0.02) 0%, rgba(15, 23, 42, 0) 22%);
+    pointer-events: none;
+}
+
+.confidence-shell {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.confidence-copy {
+    max-width: 820px;
+}
+
+.confidence-kicker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(29, 143, 227, 0.08);
+    border: 1px solid rgba(29, 143, 227, 0.12);
+    color: #0f62c9;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.confidence-title {
+    margin-top: 0.9rem;
+    font-size: clamp(2rem, 3.4vw, 3.6rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    color: #0f172a;
+    max-width: 18ch;
+}
+
+.confidence-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.1rem;
+}
+
+.confidence-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.95rem;
+    padding: 0.9rem 0.2rem 0.4rem;
+}
+
+.confidence-card h3 {
+    font-size: 1.08rem;
+    line-height: 1.2;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+}
+
+.confidence-card p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #0f172a;
+    max-width: 26ch;
+}
+
+.confidence-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    box-shadow:
+        0 8px 24px rgba(15, 23, 42, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+}
+
+.confidence-icon svg {
+    width: 23px;
+    height: 23px;
+    fill: none;
+    stroke: #0f62c9;
+    stroke-width: 1.85;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.confidence-card:hover .confidence-icon {
+    transform: translateY(-2px);
+    border-color: rgba(29, 143, 227, 0.28);
+    box-shadow:
+        0 14px 30px rgba(15, 23, 42, 0.08),
+        0 0 0 6px rgba(29, 143, 227, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.roadmap-copy h3 {
+    font-size: clamp(1.8rem, 2.5vw, 2.8rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: #0f172a;
+}
+
+    .roadmap-copy p {
+        max-width: 56ch;
+        font-size: 1.05rem;
+        line-height: 1.75;
+        color: #475569;
+}
+
+.roadmap-phone {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 460px;
+    animation: floatPhone 6s ease-in-out infinite;
+}
+
+.roadmap-phone-shadow {
+    position: absolute;
+    width: 72%;
+    height: 90px;
+    bottom: 10px;
+    background: rgba(15, 23, 42, 0.14);
+    filter: blur(30px);
+    border-radius: 50%;
+    transform: translateY(25px);
+}
+
+.roadmap-phone-frame {
+    position: relative;
+    width: min(100%, 260px);
+    aspect-ratio: 0.5;
+    border-radius: 44px;
+    padding: 10px;
+    background:
+        linear-gradient(145deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.05) 18%, rgba(0,0,0,0.03) 52%, rgba(255,255,255,0.12) 100%),
+        linear-gradient(90deg, #aeb4bf 0%, #5d6470 8%, #151a22 18%, #10141a 82%, #5d6470 92%, #c7ccd5 100%);
+    box-shadow:
+        0 24px 52px rgba(15, 23, 42, 0.18),
+        inset 0 1px 0 rgba(255,255,255,0.16);
+}
+
+.roadmap-phone-notch {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92px;
+    height: 22px;
+    border-radius: 999px;
+    background: #050505;
+    z-index: 3;
+}
+
+.roadmap-phone-screen {
+    position: relative;
+    height: 100%;
+    border-radius: 34px;
+    overflow: hidden;
+    padding: 52px 14px 14px;
+    background:
+        radial-gradient(circle at 20% 18%, rgba(29, 143, 227, 0.22) 0%, rgba(29, 143, 227, 0) 32%),
+        radial-gradient(circle at 80% 22%, rgba(16, 185, 129, 0.16) 0%, rgba(16, 185, 129, 0) 30%),
+        linear-gradient(180deg, #eef4fb 0%, #dce9f8 100%);
+}
+
+.roadmap-screen-signup {
+    background:
+        radial-gradient(circle at 20% 16%, rgba(29, 143, 227, 0.28) 0%, rgba(29, 143, 227, 0) 28%),
+        linear-gradient(180deg, #eff7ff 0%, #d9e9fb 100%);
+}
+
+.roadmap-screen-fund {
+    background:
+        radial-gradient(circle at 75% 15%, rgba(16, 185, 129, 0.18) 0%, rgba(16, 185, 129, 0) 28%),
+        linear-gradient(180deg, #f2fbf7 0%, #dff2e9 100%);
+}
+
+.roadmap-screen-invest {
+    background:
+        radial-gradient(circle at 20% 14%, rgba(245, 158, 11, 0.2) 0%, rgba(245, 158, 11, 0) 28%),
+        linear-gradient(180deg, #fffaf0 0%, #f7ead7 100%);
+}
+
+.roadmap-screen-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.roadmap-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.08);
+    color: #0f172a;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.roadmap-signal {
+    width: 28px;
+    height: 12px;
+    border-radius: 999px;
+    background:
+        linear-gradient(90deg, rgba(15, 23, 42, 0.85) 0 18%, transparent 18% 34%, rgba(15, 23, 42, 0.85) 34% 52%, transparent 52% 68%, rgba(15, 23, 42, 0.85) 68% 86%, transparent 86% 100%);
+    opacity: 0.7;
+}
+
+.roadmap-screen-card {
+    padding: 0.95rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.68);
+    border: 1px solid rgba(255, 255, 255, 0.68);
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+    margin-bottom: 0.85rem;
+}
+
+.roadmap-screen-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #1d8fe3;
+    margin-bottom: 0.35rem;
+}
+
+.roadmap-screen-card strong {
+    display: block;
+    font-size: 1.02rem;
+    line-height: 1.2;
+    color: #0f172a;
+}
+
+.roadmap-screen-stack,
+.roadmap-screen-bars,
+.roadmap-screen-grid {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.roadmap-screen-stack {
+    grid-template-columns: 1fr;
+}
+
+.roadmap-screen-stack span,
+.roadmap-screen-bars span,
+.roadmap-screen-grid span {
+    display: block;
+    height: 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.54);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.roadmap-screen-bars span {
+    height: 14px;
+}
+
+.roadmap-screen-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.roadmap-screen-grid span {
+    height: 34px;
+    border-radius: 16px;
+}
+
+.reveal-item {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-item.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-item:nth-child(2) {
+    transition-delay: 120ms;
+}
+
+.reveal-item:nth-child(3) {
+    transition-delay: 240ms;
+}
+
+@keyframes floatPhone {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes phonePulse {
+    0% {
+        transform: scale(1);
+    }
+    45% {
+        transform: scale(1.01);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .process-step {
+        transition: none;
+        animation: none;
+    }
+    .roadmap-phone,
+    .reveal-item,
+    .process-section.fade-in-up {
+        animation: none;
+        transition: none;
+        transform: none;
+        opacity: 1;
+    }
 }
 
 /* React-like Transition Entrance Animations */
@@ -330,6 +832,80 @@ nav {
     .platform-description {
         text-align: center;
     }
+    .confidence-section {
+        padding: 4.25rem 1.25rem;
+    }
+    .confidence-copy {
+        max-width: 100%;
+        text-align: center;
+    }
+    .confidence-title {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: clamp(2rem, 7vw, 2.8rem);
+    }
+    .confidence-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.9rem;
+    }
+    .confidence-card {
+        padding: 0.85rem 0.1rem 0.25rem;
+    }
+    .confidence-card p {
+        max-width: none;
+    }
+    .confidence-qr {
+        width: min(300px, 82vw);
+    }
+    .confidence-qr-swoosh {
+        height: 72px;
+    }
+    .roadmap-step,
+    .roadmap-step-reverse {
+        grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr);
+        padding: 0.5rem 0;
+        gap: 0.8rem;
+    }
+    .roadmap-spine {
+        left: 50%;
+        top: 14rem;
+        bottom: 3rem;
+        transform: translateX(-50%);
+    }
+    .roadmap-marker {
+        position: relative;
+    }
+    .roadmap-marker span {
+        width: 40px;
+        height: 40px;
+        font-size: 0.95rem;
+    }
+    .roadmap-step-reverse .roadmap-copy,
+    .roadmap-step-reverse .roadmap-marker,
+    .roadmap-step-reverse .roadmap-phone {
+        order: initial;
+    }
+    .roadmap-copy {
+        padding: 0.25rem 0;
+    }
+    .roadmap-copy h3 {
+        font-size: 1.7rem;
+    }
+    .roadmap-phone {
+        min-height: 360px;
+    }
+    .roadmap-phone-frame {
+        width: min(100%, 220px);
+        border-radius: 38px;
+    }
+    .roadmap-phone-screen {
+        padding: 46px 12px 12px;
+        border-radius: 30px;
+    }
+    .roadmap-screen-grid span {
+        height: 28px;
+    }
     .trust-strip-section {
         padding: 0 1.25rem 1.5rem 1.25rem;
     }
@@ -356,11 +932,12 @@ nav {
 /* Download Section - Color Background */
 .download-section {
     width: 100%;
-    padding: 4.5rem 2rem 6rem 2rem;
+    padding: 4rem 2rem 5rem 2rem;
     background:
-        radial-gradient(circle at top left, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 34%),
+        radial-gradient(circle at 8% 0%, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 26%),
         radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 30%),
-        linear-gradient(180deg, #4db8ff 0%, #2388ec 52%, #d7dde6 100%);
+        linear-gradient(180deg, #2c8eed 0%, #2c8eed 72%, #ffffff 100%);
+    margin-top: -2px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -373,10 +950,10 @@ nav {
 .download-section::before {
     content: '';
     position: absolute;
-    inset: 0;
+    inset: -1px -2rem 0 -2rem;
     background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 32%),
-        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 45%);
+        linear-gradient(180deg, rgba(44, 142, 237, 0.1) 0%, rgba(255, 255, 255, 0) 34%),
+        linear-gradient(180deg, rgba(44, 142, 237, 0) 0%, rgba(44, 142, 237, 0.04) 60%, rgba(255, 255, 255, 0.1) 100%);
     pointer-events: none;
 }
 
@@ -407,7 +984,7 @@ nav {
 .download-catchphrase {
     font-size: 3.35rem;
     font-weight: 800;
-    color: #ffffff;
+    color: #0f172a;
     max-width: 760px;
     letter-spacing: -0.02em;
     line-height: 1.2;
@@ -416,7 +993,7 @@ nav {
 
 .download-subtext {
     font-size: 1.3rem;
-    color: rgba(255, 255, 255, 0.92);
+    color: #0f172a;
     max-width: 620px;
     line-height: 1.6;
     margin-bottom: 0.25rem;
@@ -459,10 +1036,19 @@ nav {
 /* Ready to Start Investing Section */
 .ready-section {
     width: 100%;
-    padding: 3rem 2rem 6rem 2rem;
-    background: #ffffff;
+    padding: 3rem 2rem 4.5rem 2rem;
+    background:
+        linear-gradient(180deg, #ffffff 0%, #f7fbff 62%, #2c8eed 100%);
     position: relative;
     z-index: 10;
+}
+
+.ready-section::before {
+    content: '';
+    position: absolute;
+    inset: 0 -2rem 0 -2rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(44, 142, 237, 0) 38%);
+    pointer-events: none;
 }
 
 .ready-shell {
@@ -503,7 +1089,7 @@ nav {
 .ready-description {
     font-size: 1.18rem;
     line-height: 1.6;
-    color: #475569;
+    color: #0f172a;
     max-width: 720px;
 }
 
@@ -602,7 +1188,6 @@ nav {
     border-color: rgba(15, 23, 42, 0.2);
 }
 
-/* Cropped Phone Render */
 @keyframes logoMarquee {
     0% {
         transform: translateX(0);
@@ -667,18 +1252,29 @@ nav {
 
 /* Transparent Footer */
 .footer-section {
-    padding: 6rem 2rem 3rem 2rem;
+    padding: 6rem 0.5rem 3rem 0.5rem;
     background-color: transparent;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
     position: relative;
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0) 42%);
+    pointer-events: none;
 }
 
 .footer-grid {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: 12rem; /* Large gap next to x logo */
+    width: 100%;
+    gap: 6rem;
     margin-bottom: 4rem;
 }
 
@@ -699,7 +1295,7 @@ nav {
 
 .footer-links-group {
     display: flex;
-    gap: 6rem; /* Spaced out columns remaining on the left */
+    gap: 3rem;
 }
 
 .footer-links-col {
@@ -729,7 +1325,8 @@ nav {
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    width: 100%;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
     padding-top: 2rem;
     display: flex;
     justify-content: space-between;
@@ -743,6 +1340,29 @@ nav {
 
 /* Responsive Footer */
 @media (max-width: 768px) {
+    .process-section {
+        padding: 4.5rem 1.25rem;
+    }
+    .process-shell {
+        gap: 1.6rem;
+    }
+    .process-copy {
+        max-width: 100%;
+    }
+    .process-title {
+        font-size: clamp(2.1rem, 8vw, 3rem);
+    }
+    .process-description {
+        font-size: 1rem;
+    }
+    .process-timeline {
+        gap: 1rem;
+    }
+    .process-step {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+    }
     .download-section {
         padding: 4rem 1.25rem 5.5rem 1.25rem;
     }
@@ -761,7 +1381,7 @@ nav {
         font-size: 2.4rem;
     }
     .download-subtext {
-        color: rgba(255, 255, 255, 0.92);
+        color: #0f172a;
     }
     .download-badges {
         justify-content: center;
@@ -786,7 +1406,7 @@ nav {
         font-size: 2.4rem;
     }
     .ready-description {
-        color: #475569;
+        color: #0f172a;
     }
     .ready-actions {
         width: 100%;
@@ -795,33 +1415,6 @@ nav {
     .ready-actions .btn {
         width: 100%;
         justify-content: center;
-    }
-    .phone-render-section {
-        padding: 0;
-        margin-top: 0;
-    }
-    .phone-render-shell {
-        width: 100%;
-        height: auto;
-        margin-bottom: 0;
-    }
-    .phone-render-shell .iphone-native {
-        width: 100%;
-        max-width: 300px;
-        height: 650px;
-        transform: translateX(0) translateY(0) rotateY(12deg) rotateZ(-2deg);
-    }
-    .dynamic-island {
-        width: 116px;
-        height: 26px;
-        top: 18px;
-    }
-    .phone-screen-scroll {
-        padding: 18px 14px 14px;
-        gap: 12px;
-    }
-    .screen-value {
-        font-size: 1.8rem;
     }
     .ready-marquee {
         max-width: 100%;

@@ -1,6 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Plain homepage initialized. Ready to build!");
 
+  const restoreTop = () => {
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0, behavior: "auto" }));
+    setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: "auto" }), 0);
+    setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: "auto" }), 50);
+  };
+
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted || performance.getEntriesByType("navigation")[0]?.type === "reload") {
+      restoreTop();
+    }
+  });
+  window.addEventListener("load", restoreTop);
+  restoreTop();
+
   const API_BASE_URL = window.__STRAPI_BASE_URL__ || "http://localhost:1337";
   const LOCALES = {
     en: {
@@ -293,7 +311,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const initScrollTransitions = () => {
-    const targets = document.querySelectorAll(".fade-in-up");
+    const targets = document.querySelectorAll(".fade-in-up, .reveal-item");
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -308,6 +326,41 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   initScrollTransitions();
+
+  const initRoadmapRail = () => {
+    const processSection = document.querySelector(".process-section");
+    const steps = Array.from(document.querySelectorAll(".roadmap-step"));
+    const spineFill = document.querySelector(".roadmap-spine-fill");
+    if (!processSection || steps.length === 0) return;
+
+    const updateRail = () => {
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const firstRect = steps[0].getBoundingClientRect();
+      const lastRect = steps[steps.length - 1].getBoundingClientRect();
+      const start = firstRect.top;
+      const end = lastRect.bottom - viewportHeight * 0.25;
+      const total = Math.max(1, end - start);
+      const current = Math.min(end, Math.max(start, viewportHeight * 0.5));
+      const progress = Math.min(1, Math.max(0, (viewportHeight * 0.5 - start) / total));
+      if (spineFill) {
+        spineFill.style.setProperty("--spine-progress", `${Math.round(progress * 100)}%`);
+        spineFill.style.height = `${Math.round(progress * 100)}%`;
+      }
+
+      steps.forEach((step) => {
+        const stepRect = step.getBoundingClientRect();
+        const stepCenter = stepRect.top + stepRect.height / 2;
+        const distanceFromCenter = Math.abs(stepCenter - viewportHeight * 0.5);
+        const isActive = distanceFromCenter <= viewportHeight * 0.28;
+        step.classList.toggle("is-active", isActive);
+      });
+    };
+
+    updateRail();
+    window.addEventListener("scroll", updateRail, { passive: true });
+    window.addEventListener("resize", updateRail);
+  };
+  initRoadmapRail();
 
   const initHeaderScroll = () => {
     const header = document.querySelector("header");
