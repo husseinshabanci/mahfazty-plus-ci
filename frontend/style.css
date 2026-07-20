@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
+:root {
+    --pantone-298-c: #41b6e6;
+    --pantone-7546-c: #253746;
+    --pantone-cool-gray-4-c: #bbbcbc;
+}
+
 /* Clean Reset and Base Styles */
 * {
     margin: 0;
@@ -30,9 +36,31 @@ html {
 /* Hero Section Wrapper */
 .hero-wrapper {
     position: relative;
-    background-color: #000000;
+    background:
+        radial-gradient(circle at 72% 18%, rgba(65,182,230,0.42) 0%, rgba(65,182,230,0.1) 22%, transparent 48%),
+        radial-gradient(circle at 12% 84%, rgba(65,182,230,0.22) 0%, transparent 34%),
+        linear-gradient(135deg, #253746 0%, #162833 52%, #0e1b24 100%);
     min-height: 100vh;
     overflow: hidden;
+}
+
+.hero-wrapper::after {
+    content: '';
+    position: absolute;
+    width: min(62vw, 760px);
+    aspect-ratio: 1;
+    right: -16vw;
+    top: 10%;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 42px rgba(65,182,230,0.05),
+        0 0 0 110px rgba(65,182,230,0.035),
+        inset 0 0 70px rgba(65,182,230,0.12);
+    transform: rotate(-18deg);
+    animation: heroOrbit 18s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .hero-background-video {
@@ -53,10 +81,18 @@ html {
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.34) 50%, rgba(255, 255, 255, 0.18) 100%),
-        linear-gradient(90deg, rgba(255,255,255,0.22), rgba(255,255,255,0.08));
+        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255,255,255,0.07), transparent 48%);
+    background-size: 72px 72px, 72px 72px, 100% 100%;
+    mask-image: linear-gradient(90deg, transparent, black 18%, black 82%, transparent);
     z-index: 1;
     pointer-events: none;
+}
+
+@keyframes heroOrbit {
+    from { transform: translate3d(0, 0, 0) rotate(-18deg); }
+    to { transform: translate3d(-3%, 4%, 0) rotate(-8deg); }
 }
 
 /* Header Navbar - Invisible Bar Floating */
@@ -335,8 +371,28 @@ nav {
     width: 100%;
     height: var(--spine-progress, 0%);
     border-radius: inherit;
-    background: linear-gradient(180deg, #1d8fe3 0%, #0f62c9 100%);
-    transition: height 180ms ease-out;
+    background: linear-gradient(180deg, #8be1ff 0%, var(--pantone-298-c) 38%, #168dcc 100%);
+    box-shadow: 0 0 8px rgba(65,182,230,0.7), 0 0 18px rgba(65,182,230,var(--spine-glow,0.24));
+    transition: height 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 180ms ease-out;
+}
+
+.roadmap-spine-fill::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -32px;
+    width: 8px;
+    height: 32px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.92);
+    filter: blur(2px);
+    transform: translateX(-50%);
+    animation: spinePulse 1.35s ease-in-out infinite;
+}
+
+@keyframes spinePulse {
+    0%, 100% { opacity: 0.25; transform: translateX(-50%) scaleY(0.65); }
+    50% { opacity: 0.95; transform: translateX(-50%) scaleY(1); }
 }
 
 .process-copy {
@@ -567,11 +623,23 @@ nav {
 
 .roadmap-phone {
     position: relative;
+    perspective: 2000px;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 460px;
     animation: floatPhone 6s ease-in-out infinite;
+}
+
+.roadmap-phone::before {
+    content: '';
+    position: absolute;
+    width: 72%;
+    height: 68%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(197,180,159,0.08), transparent 68%);
+    filter: blur(32px);
+    pointer-events: none;
 }
 
 .roadmap-phone-shadow {
@@ -587,16 +655,102 @@ nav {
 
 .roadmap-phone-frame {
     position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg) rotateY(0deg);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     width: min(100%, 260px);
     aspect-ratio: 0.5;
-    border-radius: 44px;
-    padding: 10px;
+    border: 1px solid #f1f3f5;
+    border-radius: 42px;
+    padding: 7px;
     background:
-        linear-gradient(145deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.05) 18%, rgba(0,0,0,0.03) 52%, rgba(255,255,255,0.12) 100%),
-        linear-gradient(90deg, #aeb4bf 0%, #5d6470 8%, #151a22 18%, #10141a 82%, #5d6470 92%, #c7ccd5 100%);
+        linear-gradient(145deg, rgba(255,255,255,0.94), rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.52) 62%, rgba(111,118,128,0.26) 100%),
+        linear-gradient(90deg, #f4f5f6 0%, #cdd2d8 12%, #8f97a1 31%, #6f7782 50%, #9da5af 72%, #dce0e4 90%, #ffffff 100%);
     box-shadow:
-        0 24px 52px rgba(15, 23, 42, 0.18),
-        inset 0 1px 0 rgba(255,255,255,0.16);
+        0 24px 52px rgba(15, 23, 42, 0.22),
+        inset 0 1px 0 rgba(255,255,255,0.14),
+        inset 0 0 0 1px #68717c,
+        inset 0 -1px 0 rgba(44,52,62,0.42);
+}
+
+.roadmap-phone-frame::before {
+    transform: translateZ(-7px);
+}
+
+.roadmap-phone-screen {
+    transform: translateZ(2px);
+    box-shadow: inset 0 0 0 7px #050505, inset 0 0 0 8px #68717c;
+}
+
+.screen-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.glass-glare {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: inherit;
+    background: linear-gradient(230deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.05) 20%, rgba(0,0,0,0) 45%);
+    transform: translate3d(0, 0, 3px);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    mix-blend-mode: screen;
+}
+
+.roadmap-phone-button {
+    position: absolute;
+    right: -7px;
+    z-index: 5;
+    width: 4px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #727a86, #f1f3f5 45%, #69727e);
+    box-shadow: 1px 2px 3px rgba(15,23,42,0.34);
+    transform: translateZ(7px);
+}
+
+.roadmap-phone-button-power { top: 116px; height: 48px; }
+.roadmap-phone-button-camera { top: 178px; height: 22px; background: #68717c; }
+.roadmap-phone-button-action,
+.roadmap-phone-button-volume-up,
+.roadmap-phone-button-volume-down {
+    right: auto;
+    left: -7px;
+}
+.roadmap-phone-button-action { top: 94px; height: 24px; }
+.roadmap-phone-button-volume-up { top: 132px; height: 38px; }
+.roadmap-phone-button-volume-down { top: 180px; height: 38px; }
+
+.roadmap-step-reverse .roadmap-phone-frame {
+    transform: rotateX(0deg) rotateY(0deg);
+}
+
+.roadmap-phone-frame::before,
+.roadmap-phone-frame::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #7f8792, #eef0f3 42%, #8a929d 72%, #626b77);
+    z-index: 4;
+    box-shadow: inset 0 0 0 0.5px rgba(255,255,255,0.45);
+}
+
+.roadmap-phone-frame::before {
+    top: 116px;
+    right: -4px;
+    height: 48px;
+    box-shadow: 0 62px 0 #2d3440, 1px 0 3px rgba(0,0,0,0.7);
+}
+
+.roadmap-phone-frame::after {
+    top: 108px;
+    left: -4px;
+    height: 24px;
+    box-shadow: 0 40px 0 #2d3440, 0 72px 0 #2d3440, -1px 0 3px rgba(0,0,0,0.7);
 }
 
 .roadmap-phone-notch {
@@ -621,6 +775,9 @@ nav {
         radial-gradient(circle at 20% 18%, rgba(29, 143, 227, 0.22) 0%, rgba(29, 143, 227, 0) 32%),
         radial-gradient(circle at 80% 22%, rgba(16, 185, 129, 0.16) 0%, rgba(16, 185, 129, 0) 30%),
         linear-gradient(180deg, #eef4fb 0%, #dce9f8 100%);
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.4),
+        inset 0 0 12px rgba(0,0,0,0.28);
 }
 
 .roadmap-screen-signup {
@@ -629,16 +786,244 @@ nav {
         linear-gradient(180deg, #eff7ff 0%, #d9e9fb 100%);
 }
 
+.roadmap-screen-signup::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 10%;
+    background: #ffffff;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.roadmap-screen-image {
+    position: relative;
+    padding: 0;
+    background: #f8fafc;
+}
+
+.roadmap-screen-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transform: translateY(8px) scale(0.96);
+    transform-origin: center top;
+}
+
+.roadmap-screen-image::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 10%;
+    background: #f8fafc;
+    pointer-events: none;
+}
+
 .roadmap-screen-fund {
+    background: #f8fafc;
+}
+
+.roadmap-screen-fund img {
+    object-fit: fill;
+    object-position: center top;
+    transform: translateY(21px) scale(0.96) scaleX(1.04);
+}
+
+.roadmap-screen-fund::after {
+    content: none;
+}
+
+.roadmap-screen-image-step3 {
+    background: #ffffff;
+    box-shadow: inset 0 0 0 1px #ffffff;
+}
+
+.roadmap-screen-image-step3 img {
+    object-fit: fill;
+    object-position: center top;
+    filter: brightness(1.14) contrast(1.04) saturate(0.9);
+    transform: translateY(21px) scale(0.96) scaleX(1.04);
+}
+
+.roadmap-screen-image-step3::after {
+    content: none;
+}
+
+/* Simple roadmap phone treatment. */
+.roadmap-phone {
+    perspective: none;
+}
+
+.roadmap-phone-frame,
+.roadmap-step-reverse .roadmap-phone-frame {
+    transform: none;
+    border: 1px solid #050505;
+    padding: 5px;
+    background: linear-gradient(90deg, #050505, #181818 48%, #050505);
+    box-shadow: 0 24px 52px rgba(15, 23, 42, 0.24), inset 0 1px 0 rgba(255,255,255,0.12), inset 0 -1px 0 rgba(0,0,0,0.8);
+}
+
+.roadmap-phone-frame::before,
+.roadmap-phone-frame::after,
+.glass-glare {
+    display: none;
+}
+
+.roadmap-phone-button {
+    display: block;
+    right: -3px;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #252a31, #a8afb8 48%, #3b424b);
+    box-shadow: 0 1px 2px rgba(15,23,42,0.28);
+    transform: translateZ(2px);
+}
+
+.roadmap-phone-button-action,
+.roadmap-phone-button-volume-up,
+.roadmap-phone-button-volume-down {
+    left: -3px;
+    right: auto;
+}
+
+.roadmap-phone-button-camera {
+    background: linear-gradient(90deg, #20252c, #68717c 48%, #252a31);
+}
+
+/* Pantone brand palette: 298 C, 7546 C, and Cool Gray 4 C. */
+body {
+    color: var(--pantone-7546-c);
+}
+
+.hero-wrapper,
+header.scrolled,
+footer {
+    background-color: var(--pantone-7546-c);
+}
+
+.btn-primary,
+.btn-get-started {
+    background-color: var(--pantone-298-c);
+    box-shadow: 0 8px 24px rgba(65, 182, 230, 0.32);
+}
+
+.btn-primary:hover,
+.btn-get-started:hover {
+    background-color: #238fbd;
+}
+
+.btn-secondary {
+    background-color: var(--pantone-cool-gray-4-c);
+    border-color: #a5a7a8;
+    color: var(--pantone-7546-c);
+}
+
+.hero-kicker,
+.section-kicker {
+    color: var(--pantone-7546-c);
+}
+
+.process-section {
+    background: linear-gradient(180deg, #ffffff 0%, #ffffff 56%, var(--pantone-298-c) 100%);
+}
+
+.confidence-section {
+    background: linear-gradient(180deg, var(--pantone-298-c) 0%, #e9f7fc 42%, #ffffff 100%);
+}
+
+.download-section {
+    background: linear-gradient(180deg, var(--pantone-298-c) 0%, var(--pantone-298-c) 72%, #ffffff 100%);
+}
+
+.process-section::before,
+.confidence-section::before,
+.download-section::before {
     background:
-        radial-gradient(circle at 75% 15%, rgba(16, 185, 129, 0.18) 0%, rgba(16, 185, 129, 0) 28%),
-        linear-gradient(180deg, #f2fbf7 0%, #dff2e9 100%);
+        linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 34%),
+        radial-gradient(circle at 80% 0%, rgba(65,182,230,0.16) 0%, rgba(65,182,230,0) 32%);
+}
+
+.roadmap-spine-fill,
+.roadmap-marker span {
+    background: linear-gradient(180deg, var(--pantone-298-c) 0%, #238fbd 100%);
+}
+
+.roadmap-spine {
+    background: rgba(187,188,188,0.36);
+}
+
+.process-title,
+.process-description,
+.roadmap-copy h3,
+.roadmap-copy p,
+.confidence-title,
+.download-catchphrase,
+.download-subtext,
+.download-badges .badge-main {
+    color: var(--pantone-7546-c);
+}
+
+.confidence-card,
+.asset-card,
+.trust-strip {
+    border-color: rgba(187,188,188,0.72);
+}
+
+.confidence-icon {
+    background: rgba(65,182,230,0.14);
+    color: var(--pantone-298-c);
+}
+
+.download-badges .badge-sub,
+.footer-bottom,
+.footer-links a {
+    color: var(--pantone-cool-gray-4-c);
+}
+
+.roadmap-phone-screen {
+    transform: none;
+    box-shadow: none;
+}
+
+.roadmap-phone-notch::after {
+    content: '';
+    position: absolute;
+    top: 7px;
+    right: 12px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #51555c 0 18%, #111318 42%, #020202 75%);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+.home-indicator {
+    position: absolute;
+    left: 50%;
+    bottom: 7px;
+    z-index: 4;
+    width: 58px;
+    height: 3px;
+    border-radius: 999px;
+    background: #050505;
+    transform: translateX(-50%);
+    pointer-events: none;
 }
 
 .roadmap-screen-invest {
     background:
         radial-gradient(circle at 20% 14%, rgba(245, 158, 11, 0.2) 0%, rgba(245, 158, 11, 0) 28%),
         linear-gradient(180deg, #fffaf0 0%, #f7ead7 100%);
+}
+
+.roadmap-screen-image-step3 {
+    background: #ffffff;
 }
 
 .roadmap-screen-header {
@@ -784,6 +1169,21 @@ nav {
         transform: none;
         opacity: 1;
     }
+}
+
+/* Remove all section overlay paint at the boundaries. */
+.process-section::before,
+.confidence-section::before,
+.ready-section::before,
+.download-section::before {
+    content: none !important;
+    display: none !important;
+}
+
+.confidence-section,
+.ready-section {
+    border-top: 0 !important;
+    border-bottom: 0 !important;
 }
 
 /* React-like Transition Entrance Animations */
@@ -1442,4 +1842,437 @@ nav {
         gap: 1rem;
         text-align: center;
     }
+}
+
+/* Final section color continuity overrides. */
+.confidence-section {
+    background: linear-gradient(180deg, var(--pantone-298-c) 0%, #e9f7fc 48%, #ffffff 100%) !important;
+}
+
+.confidence-section::before {
+    background: linear-gradient(180deg, rgba(65,182,230,0.16) 0%, rgba(255,255,255,0) 48%) !important;
+}
+
+.ready-section {
+    background: linear-gradient(180deg, #ffffff 0%, #ffffff 55%, var(--pantone-298-c) 100%) !important;
+}
+
+.ready-section::before {
+    background: linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(65,182,230,0) 48%) !important;
+}
+
+.download-section {
+    background: linear-gradient(180deg, var(--pantone-298-c) 0%, var(--pantone-298-c) 72%, #ffffff 100%) !important;
+}
+
+.download-section::before {
+    background: linear-gradient(180deg, rgba(65,182,230,0.1) 0%, rgba(255,255,255,0) 48%) !important;
+}
+
+.footer-section {
+    background: var(--pantone-cool-gray-4-c) !important;
+    margin-top: 0;
+}
+
+.footer-section::before {
+    display: none;
+}
+
+.footer-bottom {
+    border-top: 0 !important;
+}
+
+.footer-logo,
+.footer-links-title,
+.footer-link,
+.footer-copyright {
+    color: var(--pantone-7546-c) !important;
+}
+
+.process-section,
+.confidence-section,
+.ready-section,
+.download-section,
+.footer-section {
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+.process-section::before,
+.confidence-section::before,
+.ready-section::before,
+.download-section::before {
+    top: 0 !important;
+    bottom: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+}
+
+.download-section {
+    margin-top: 0 !important;
+}
+
+/* Cool Gray 4 C section surfaces with 298 C transitions. */
+.process-section {
+    background: linear-gradient(180deg, var(--pantone-cool-gray-4-c) 0%, var(--pantone-cool-gray-4-c) 58%, var(--pantone-298-c) 100%) !important;
+}
+
+.confidence-section {
+    background: linear-gradient(180deg, var(--pantone-298-c) 0%, #cfeef8 42%, var(--pantone-cool-gray-4-c) 100%) !important;
+}
+
+.ready-section {
+    background: linear-gradient(180deg, var(--pantone-cool-gray-4-c) 0%, var(--pantone-cool-gray-4-c) 58%, var(--pantone-298-c) 100%) !important;
+}
+
+.download-section {
+    background: linear-gradient(180deg, var(--pantone-298-c) 0%, var(--pantone-298-c) 70%, var(--pantone-cool-gray-4-c) 100%) !important;
+}
+
+.process-section::before,
+.confidence-section::before,
+.ready-section::before,
+.download-section::before {
+    background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0) 44%) !important;
+}
+
+@media (max-width: 768px) {
+    header { padding: 0.9rem 0; }
+    header nav { gap: 0.75rem; }
+    .logo, #logo-text-span { font-size: 0.9rem; white-space: nowrap; }
+    .nav-links { display: none; }
+    .nav-actions { gap: 0.45rem; }
+    .nav-actions .btn { padding: 0.6rem 0.85rem; font-size: 0.78rem; }
+    .lang-btn { padding: 0.45rem 0.55rem; font-size: 0.75rem; }
+    .hero-container { min-height: 100svh; padding: 7rem 1.25rem 2.5rem; }
+    .hero-title { max-width: 12ch; font-size: clamp(2.5rem, 12vw, 4rem); }
+    .hero-subtitle { max-width: 38ch; font-size: 1rem; }
+    .hero-content .btn { width: min(100%, 19rem); }
+    .roadmap-phone-frame { width: min(68vw, 220px); }
+    .roadmap-phone-button { right: -2px; }
+    .roadmap-phone-button-action,
+    .roadmap-phone-button-volume-up,
+    .roadmap-phone-button-volume-down { left: -2px; }
+    .download-badges { width: 100%; flex-wrap: wrap; }
+    .download-badges .badge-btn { flex: 1 1 14rem; }
+}
+
+@media (max-width: 480px) {
+    .container { padding-left: 1rem; padding-right: 1rem; }
+    .nav-actions .btn { display: none; }
+    .hero-title { font-size: clamp(2.35rem, 13vw, 3.2rem); }
+    .process-section, .confidence-section, .faq-section,
+    .ready-section, .download-section { padding-left: 1rem; padding-right: 1rem; }
+    .confidence-grid { grid-template-columns: 1fr; }
+    .roadmap-phone-frame { width: min(72vw, 205px); }
+    .faq-item summary { font-size: 1rem; }
+}
+
+@media (max-width: 768px) {
+    .process-section {
+        overflow: hidden;
+        padding-top: 4rem;
+        padding-bottom: 5rem;
+    }
+
+    .process-shell {
+        width: 100%;
+    }
+
+    .process-timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 3.5rem;
+        width: 100%;
+    }
+
+    .roadmap-step,
+    .roadmap-step-reverse {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        min-width: 0;
+        gap: 1rem;
+        padding: 1rem 0 2rem;
+    }
+
+    .roadmap-step .roadmap-copy,
+    .roadmap-step-reverse .roadmap-copy {
+        order: 1;
+        width: 100%;
+        padding: 0 0.5rem;
+        text-align: center;
+    }
+
+    .roadmap-step .roadmap-marker,
+    .roadmap-step-reverse .roadmap-marker {
+        order: 2;
+    }
+
+    .roadmap-step .roadmap-phone,
+    .roadmap-step-reverse .roadmap-phone {
+        order: 3;
+        width: 100%;
+        min-height: 0;
+        overflow: visible;
+    }
+
+    .roadmap-spine {
+        left: 50%;
+        top: 13rem;
+        bottom: 4rem;
+        width: 3px;
+    }
+
+    .roadmap-phone-frame {
+        width: min(62vw, 210px);
+        max-width: 100%;
+    }
+
+    .roadmap-spine {
+        display: none;
+    }
+}
+
+.skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 2000;
+    padding: 0.7rem 1rem;
+    border-radius: 0.5rem;
+    background: var(--pantone-7546-c);
+    color: #ffffff;
+    transform: translateY(-160%);
+    transition: transform 160ms ease;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+:where(a, button, summary):focus-visible {
+    outline: 3px solid var(--pantone-298-c);
+    outline-offset: 4px;
+}
+
+main:focus {
+    outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Plain brand hero and unified controls. */
+.hero-wrapper {
+    background: var(--pantone-7546-c) !important;
+}
+
+.hero-wrapper::before,
+.hero-wrapper::after {
+    display: none;
+}
+
+.btn,
+.btn-primary,
+.btn-get-started,
+.badge-btn,
+.ready-primary {
+    background-color: var(--pantone-298-c) !important;
+    border-color: var(--pantone-298-c) !important;
+    color: #ffffff !important;
+}
+
+.btn:hover,
+.btn-primary:hover,
+.btn-get-started:hover,
+.badge-btn:hover,
+.ready-primary:hover {
+    background-color: #238fbd !important;
+    border-color: #238fbd !important;
+}
+
+.btn-secondary,
+.ready-secondary {
+    background-color: var(--pantone-cool-gray-4-c) !important;
+    border-color: var(--pantone-cool-gray-4-c) !important;
+    color: var(--pantone-7546-c) !important;
+}
+
+.lang-btn {
+    border-color: var(--pantone-298-c);
+    color: var(--pantone-298-c);
+}
+
+.download-badges .badge-btn {
+    background: #ffffff !important;
+    border-color: #ffffff !important;
+    color: var(--pantone-7546-c) !important;
+}
+
+.download-badges .badge-btn:hover {
+    background: #f4f6f7 !important;
+    border-color: #f4f6f7 !important;
+}
+
+.download-badges .badge-main {
+    color: var(--pantone-7546-c) !important;
+}
+
+.faq-section {
+    position: relative;
+    padding: clamp(4.5rem, 7vw, 7rem) 2rem;
+    background: #ffffff;
+}
+
+.faq-shell {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+    align-items: start;
+    max-width: 900px;
+}
+
+.faq-heading {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.faq-heading h2 {
+    margin-top: 1rem;
+    color: var(--pantone-7546-c);
+    font-size: clamp(2.4rem, 4vw, 4.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+}
+
+.faq-heading h2::after {
+    content: '';
+    display: block;
+    width: 64px;
+    height: 4px;
+    margin: 1.25rem auto 0;
+    border-radius: 999px;
+    background: var(--pantone-298-c);
+}
+
+.faq-heading > p:last-child {
+    margin-top: 1.25rem;
+    color: #53616b;
+    line-height: 1.7;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.faq-item {
+    overflow: hidden;
+    border: 1px solid rgba(187,188,188,0.72);
+    border-left: 4px solid transparent;
+    border-radius: 4px;
+    background: #ffffff;
+    box-shadow: 0 7px 18px rgba(37,55,70,0.06);
+    transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.faq-item:hover {
+    border-left-color: var(--pantone-298-c);
+    box-shadow: 0 12px 24px rgba(37,55,70,0.1);
+}
+
+.faq-item[open] {
+    border-color: rgba(65,182,230,0.72);
+    border-left-color: var(--pantone-298-c);
+    box-shadow: 0 14px 30px rgba(37,55,70,0.1);
+    transform: translateY(-2px);
+}
+
+.faq-item summary {
+    position: relative;
+    padding: 1.3rem 3.5rem 1.3rem 1.35rem;
+    color: var(--pantone-7546-c);
+    cursor: pointer;
+    font-size: 1.12rem;
+    font-weight: 700;
+    list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::after {
+    content: '+';
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 1px solid var(--pantone-298-c);
+    border-radius: 4px;
+    color: var(--pantone-298-c);
+    font-size: 1.35rem;
+    font-weight: 400;
+    transform: translateY(-50%);
+    transition: transform 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+.faq-item[open] summary::after {
+    content: '\2212';
+    color: #ffffff;
+    background: var(--pantone-298-c);
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.faq-item p {
+    max-width: 58ch;
+    padding: 0 1.35rem 1.35rem;
+    color: #53616b;
+    line-height: 1.7;
+}
+
+@media (max-width: 760px) {
+    .faq-section {
+        padding: 4.5rem 1.25rem;
+    }
+
+    .faq-shell {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .faq-heading {
+        position: static;
+    }
+}
+
+/* Final boundary cleanup: section backgrounds meet without overlay lines. */
+.process-section::before,
+.confidence-section::before,
+.ready-section::before,
+.download-section::before {
+    content: none !important;
+    display: none !important;
+}
+
+.confidence-section,
+.ready-section {
+    border-top: 0 !important;
+    border-bottom: 0 !important;
 }

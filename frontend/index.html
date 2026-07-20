@@ -13,12 +13,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <div class="hero-wrapper">
-        <video class="hero-background-video" autoplay muted loop playsinline aria-hidden="true" poster="sky_clouds_background.png">
-            <source src="hero-background.mp4" type="video/mp4">
-        </video>
         <header>
-            <nav class="container">
+            <nav class="container" aria-label="Primary navigation">
                 <a href="#" class="logo" id="logo-anchor">
                     <img src="" alt="Mahfazty CIBC Logo" id="logo-img" style="display: none; max-height: 40px; width: auto; object-fit: contain;">
                     <span id="logo-text-span">MAHFAZTY CIBC</span>
@@ -27,7 +25,7 @@
                     <!-- Dynamic Navigation Links -->
                 </ul>
                 <div class="nav-actions">
-                    <button class="lang-btn" id="lang-btn">
+                    <button class="lang-btn" id="lang-btn" type="button" aria-label="Switch language">
                         <span id="lang-txt">العربية</span>
                     </button>
                     <a href="#download" class="btn btn-primary" id="nav-btn-cta">Open Account</a>
@@ -35,7 +33,7 @@
             </nav>
         </header>
 
-        <main class="hero-container">
+        <main class="hero-container" id="main-content" tabindex="-1">
             <section class="hero-content">
                 <h1 class="hero-title" id="hero-title">Stay in control when the market moves.</h1>
                 <p class="hero-subtitle" id="hero-desc">A focused investing experience for people at every stage, whether you are building confidence, staying active, or making faster decisions with clarity.</p>
@@ -44,10 +42,10 @@
         </main>
     </div>
 
-    <section class="process-section fade-in-up" id="process">
+    <section class="process-section fade-in-up" id="process" aria-labelledby="process-title">
         <div class="container process-shell">
             <div class="process-copy">
-                <h2 class="process-title">Follow the app from top to bottom in three simple steps.</h2>
+                <h2 class="process-title" id="process-title">Follow the app from top to bottom in three simple steps.</h2>
                 <p class="process-description">A roadmap-style walkthrough with a small iPhone mockup for each step, alternating left and right so the flow feels clear and polished.</p>
             </div>
             <div class="roadmap-spine" aria-hidden="true">
@@ -66,20 +64,15 @@
                         <div class="roadmap-phone-shadow"></div>
                         <div class="roadmap-phone-frame">
                             <div class="roadmap-phone-notch"></div>
-                            <div class="roadmap-phone-screen roadmap-screen-signup">
-                                <div class="roadmap-screen-header">
-                                    <span class="roadmap-chip">9:41</span>
-                                    <span class="roadmap-signal"></span>
-                                </div>
-                                <div class="roadmap-screen-card">
-                                    <span class="roadmap-screen-label">Create profile</span>
-                                    <strong>Start your journey</strong>
-                                </div>
-                                <div class="roadmap-screen-stack">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
+                            <div class="roadmap-phone-button roadmap-phone-button-power"></div>
+                            <div class="roadmap-phone-button roadmap-phone-button-camera"></div>
+                            <div class="roadmap-phone-button roadmap-phone-button-action"></div>
+                            <div class="roadmap-phone-button roadmap-phone-button-volume-up"></div>
+                            <div class="roadmap-phone-button roadmap-phone-button-volume-down"></div>
+                            <div class="roadmap-phone-screen roadmap-screen-signup roadmap-screen-image">
+                                <div class="screen-content"><img src="assets/step-1-login.jpeg" alt="Mahfazty login screen"></div>
+                                <div class="glass-glare"></div>
+                                <div class="home-indicator" aria-hidden="true"></div>
                             </div>
                         </div>
                     </div>
@@ -96,20 +89,15 @@
                         <div class="roadmap-phone-shadow"></div>
                         <div class="roadmap-phone-frame">
                             <div class="roadmap-phone-notch"></div>
-                            <div class="roadmap-phone-screen roadmap-screen-fund">
-                                <div class="roadmap-screen-header">
-                                    <span class="roadmap-chip">9:41</span>
-                                    <span class="roadmap-signal"></span>
-                                </div>
-                                <div class="roadmap-screen-card">
-                                    <span class="roadmap-screen-label">Add funds</span>
-                                    <strong>Deposit securely</strong>
-                                </div>
-                                <div class="roadmap-screen-bars">
-                                    <span style="width: 68%"></span>
-                                    <span style="width: 84%"></span>
-                                    <span style="width: 56%"></span>
-                                </div>
+                            <div class="roadmap-phone-button roadmap-phone-button-power"></div>
+                            <div class="roadmap-phone-button roadmap-phone-button-camera"></div>
+                            <div class="roadmap-phone-button roadmap-phone-button-action"></div>
+                            <div class="roadmap-phone-button roadmap-phone-button-volume-up"></div>
+                            <div class="roadmap-phone-button roadmap-phone-button-volume-down"></div>
+                            <div class="roadmap-phone-screen roadmap-screen-fund roadmap-screen-image">
+                                <div class="screen-content"><img src="assets/step-2-add-money.png" alt="Mahfazty add money screen"></div>
+                                <div class="glass-glare"></div>
+                                <div class="home-indicator" aria-hidden="true"></div>
                             </div>
                         </div>
                     </div>
@@ -126,21 +114,15 @@
                         <div class="roadmap-phone-shadow"></div>
                         <div class="roadmap-phone-frame">
                             <div class="roadmap-phone-notch"></div>
-                            <div class="roadmap-phone-screen roadmap-screen-invest">
-                                <div class="roadmap-screen-header">
-                                    <span class="roadmap-chip">9:41</span>
-                                    <span class="roadmap-signal"></span>
-                                </div>
-                                <div class="roadmap-screen-card">
-                                    <span class="roadmap-screen-label">Market view</span>
-                                    <strong>Place your first trade</strong>
-                                </div>
-                                <div class="roadmap-screen-grid">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
+                            <div class="roadmap-phone-button roadmap-phone-button-power"></div>
+                            <div class="roadmap-phone-button roadmap-phone-button-camera"></div>
+                            <div class="roadmap-phone-button roadmap-phone-button-action"></div>
+                            <div class="roadmap-phone-button roadmap-phone-button-volume-up"></div>
+                            <div class="roadmap-phone-button roadmap-phone-button-volume-down"></div>
+                            <div class="roadmap-phone-screen roadmap-screen-invest roadmap-screen-image roadmap-screen-image-step3">
+                                <div class="screen-content"><img src="assets/step-3-market.png" alt="Mahfazty portfolio screen"></div>
+                                <div class="glass-glare"></div>
+                                <div class="home-indicator" aria-hidden="true"></div>
                             </div>
                         </div>
                     </div>
@@ -149,10 +131,10 @@
         </div>
     </section>
 
-    <section class="confidence-section fade-in-up" id="confidence">
+    <section class="confidence-section fade-in-up" id="confidence" aria-labelledby="confidence-title">
         <div class="container confidence-shell">
             <div class="confidence-copy">
-                <h2 class="confidence-title">We work hard to keep your account, data, and access protected.</h2>
+                <h2 class="confidence-title" id="confidence-title">We work hard to keep your account, data, and access protected.</h2>
             </div>
             <div class="confidence-grid">
                 <article class="confidence-card">

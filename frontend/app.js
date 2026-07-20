@@ -344,6 +344,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const progress = Math.min(1, Math.max(0, (viewportHeight * 0.5 - start) / total));
       if (spineFill) {
         spineFill.style.setProperty("--spine-progress", `${Math.round(progress * 100)}%`);
+        spineFill.style.setProperty("--spine-glow", `${(0.18 + progress * 0.42).toFixed(2)}`);
         spineFill.style.height = `${Math.round(progress * 100)}%`;
       }
 
@@ -361,6 +362,35 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("resize", updateRail);
   };
   initRoadmapRail();
+
+  const initPhoneParallax = () => {
+    const phones = document.querySelectorAll(".roadmap-phone-frame");
+    if (phones.length === 0) return;
+
+    phones.forEach((phone) => {
+      const glare = phone.querySelector(".glass-glare");
+      const reverse = phone.closest(".roadmap-step-reverse");
+      const baseY = 0;
+      const baseZ = 0;
+
+      phone.addEventListener("mousemove", (event) => {
+        const rect = phone.getBoundingClientRect();
+        const x = (event.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+        const y = (event.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+        const tiltY = baseY + Math.max(-12, Math.min(12, x * 12));
+        const tiltX = Math.max(-12, Math.min(12, -y * 12));
+        phone.style.transform = `rotateY(${tiltY}deg) rotateX(${tiltX}deg) rotateZ(${baseZ}deg)`;
+        if (glare) glare.style.transform = `translate3d(${-x * 18}px, ${-y * 14}px, 3px)`;
+      });
+
+      phone.addEventListener("mouseleave", () => {
+        phone.style.transform = `rotateY(${baseY}deg) rotateX(0deg) rotateZ(${baseZ}deg)`;
+        if (glare) glare.style.transform = "translate3d(0, 0, 3px)";
+      });
+    });
+  };
+
+  // Keep the roadmap mockups static in the simple presentation.
 
   const initHeaderScroll = () => {
     const header = document.querySelector("header");
