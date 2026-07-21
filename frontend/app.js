@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
       heroDescription:
         "A focused investing experience for people at every stage, whether you are building confidence, staying active, or making faster decisions with clarity.",
       heroPrimaryBtnText: "Get Started",
+      heroHint: "Scroll to zoom through — tilt your cursor across the scene.",
       downloadTitle: "Trade when you're ready, from wherever you're working.",
       downloadDescription:
         "Available on iOS and Android for investors who want a mobile workflow that keeps up with the market.",
@@ -54,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       footerPrivacy: "Privacy Policy",
       footerPress: "Press",
       footerCareers: "Careers",
-      footerCopyright: "© 2026 Mahfazty CIBC. All rights reserved.",
+      footerCopyright: "All rights reserved - 2026 © Mahfazty PLUS",
     },
     ar: {
       htmlLang: "ar-EG",
@@ -66,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
       heroDescription:
         "تجربة استثمار مركزة تناسبك في كل المراحل، سواء كنت بتبني ثقتك، أو بتتابع استثماراتك، أو بتاخد قرارات أسرع وبوضوح أكبر.",
       heroPrimaryBtnText: "ابدأ الآن",
+      heroHint: "مرر لأسفل للتكبير — حرّك المؤشر في المشهد.",
       downloadTitle: "اتداول وقت ما تكون جاهز، من أي مكان إنت فيه.",
       downloadDescription:
         "متاح على iOS وAndroid للمستثمرين اللي عايزين تجربة موبايل تواكب السوق.",
@@ -89,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
       footerPrivacy: "سياسة الخصوصية",
       footerPress: "الصحافة",
       footerCareers: "الوظائف",
-      footerCopyright: "© 2026 Mahfazty CIBC. جميع الحقوق محفوظة.",
+      footerCopyright: "All rights reserved - 2026 © Mahfazty PLUS",
     },
   };
   const STORAGE_KEY = "mahfazty_locale";
@@ -114,6 +116,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const heroPrimary = document.getElementById("hero-btn-primary");
     if (heroPrimary) heroPrimary.textContent = copy.heroPrimaryBtnText;
+
+    const heroHint = document.getElementById("hero-hint");
+    if (heroHint) heroHint.textContent = copy.heroHint;
 
     const downloadTitle = document.getElementById("download-title");
     if (downloadTitle) downloadTitle.textContent = copy.downloadTitle;
@@ -391,6 +396,55 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Keep the roadmap mockups static in the simple presentation.
+
+  const initHeroScene = () => {
+    const heroWrapper = document.querySelector(".hero-wrapper");
+    const scene = document.getElementById("hero-scene");
+    const ringWrap = document.getElementById("hero-ring-wrap");
+    const sparksHost = document.getElementById("hero-sparks");
+    if (!heroWrapper || !scene || !ringWrap || !sparksHost) return;
+
+    const sparkData = Array.from({ length: 10 }, (_, i) => ({
+      left: 6 + i * 9.5,
+      delay: i * 0.7,
+      dur: 5 + (i % 4),
+      sx: (i % 2 === 0 ? 1 : -1) * (20 + i * 6),
+      sz: (i % 3) * 40 - 40,
+    }));
+
+    sparkData.forEach((s) => {
+      const span = document.createElement("span");
+      span.style.left = `${s.left}%`;
+      span.style.setProperty("--sx", `${s.sx}px`);
+      span.style.setProperty("--sz", `${s.sz}px`);
+      span.style.animation = `sparkRise ${s.dur}s ease-in ${s.delay}s infinite`;
+      sparksHost.appendChild(span);
+    });
+
+    heroWrapper.addEventListener("mousemove", (event) => {
+      const rect = heroWrapper.getBoundingClientRect();
+      const nx = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+      const ny = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+      const tiltX = (-ny * 8).toFixed(2);
+      const tiltY = (nx * 10).toFixed(2);
+      scene.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    });
+
+    heroWrapper.addEventListener("mouseleave", () => {
+      scene.style.transform = "rotateX(0deg) rotateY(0deg)";
+    });
+
+    const updateRingZoom = () => {
+      const progress = Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.9)));
+      const ringScale = (1 + progress * 7).toFixed(2);
+      const ringOpacity = (0.55 * (1 - progress * 0.9)).toFixed(2);
+      ringWrap.style.transform = `translate3d(-50%, 0, -260px) scale(${ringScale})`;
+      ringWrap.style.opacity = ringOpacity;
+    };
+    updateRingZoom();
+    window.addEventListener("scroll", updateRingZoom, { passive: true });
+  };
+  initHeroScene();
 
   const initHeaderScroll = () => {
     const header = document.querySelector("header");

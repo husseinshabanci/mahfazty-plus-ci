@@ -41,58 +41,90 @@ html {
         radial-gradient(circle at 12% 84%, rgba(65,182,230,0.22) 0%, transparent 34%),
         linear-gradient(135deg, #253746 0%, #162833 52%, #0e1b24 100%);
     min-height: 100vh;
-    overflow: hidden;
+    overflow: visible;
+    perspective: 1400px;
 }
 
-.hero-wrapper::after {
-    content: '';
-    position: absolute;
-    width: min(62vw, 760px);
-    aspect-ratio: 1;
-    right: -16vw;
-    top: 10%;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 50%;
-    box-shadow:
-        0 0 0 42px rgba(65,182,230,0.05),
-        0 0 0 110px rgba(65,182,230,0.035),
-        inset 0 0 70px rgba(65,182,230,0.12);
-    transform: rotate(-18deg);
-    animation: heroOrbit 18s ease-in-out infinite alternate;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.hero-background-video {
+/* Interactive hero scene: mouse-tilt 3D layer with a scroll-zoomed ring,
+   a flowing floor grid, and rising sparks. */
+.hero-scene {
     position: absolute;
     inset: 0;
+    z-index: 1;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg) rotateY(0deg);
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-ring-wrap {
+    position: absolute;
+    left: 50%;
+    top: 8%;
+    width: min(70vw, 820px);
+    aspect-ratio: 1;
+    transform: translate3d(-50%, 0, -260px) scale(1);
+    transition: transform 0.1s linear;
+    opacity: 0.55;
+}
+
+.hero-ring {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center center;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0.42;
-    filter: saturate(0.85) contrast(0.95) brightness(1.08);
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, rgba(65, 182, 230, 0.5), rgba(65, 182, 230, 0) 30%, rgba(65, 182, 230, 0.35) 60%, rgba(65, 182, 230, 0) 90%, rgba(65, 182, 230, 0.5));
+    filter: blur(2px);
+    animation: ringSpin2 14s linear infinite;
+    transform: rotateX(70deg);
 }
 
-.hero-wrapper::before {
-    content: '';
+.hero-floor {
     position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(255,255,255,0.07), transparent 48%);
-    background-size: 72px 72px, 72px 72px, 100% 100%;
-    mask-image: linear-gradient(90deg, transparent, black 18%, black 82%, transparent);
-    z-index: 1;
+    left: 50%;
+    bottom: -10%;
+    width: 180%;
+    height: 60%;
+    transform: translateX(-50%) rotateX(72deg) translateZ(-120px);
+    background-image:
+        linear-gradient(rgba(65, 182, 230, 0.35) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(65, 182, 230, 0.35) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: linear-gradient(to top, black, transparent 85%);
+    mask-image: linear-gradient(to top, black, transparent 85%);
+    animation: floorFlow 4s linear infinite;
     pointer-events: none;
 }
 
-@keyframes heroOrbit {
-    from { transform: translate3d(0, 0, 0) rotate(-18deg); }
-    to { transform: translate3d(-3%, 4%, 0) rotate(-8deg); }
+.hero-sparks span {
+    position: absolute;
+    bottom: 6%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #41b6e6;
+    box-shadow: 0 0 8px 2px rgba(65, 182, 230, 0.8);
+}
+
+.hero-hint {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.02em;
+}
+
+@keyframes ringSpin2 {
+    from { transform: rotateX(70deg) rotate(0deg); }
+    to { transform: rotateX(70deg) rotate(360deg); }
+}
+
+@keyframes floorFlow {
+    from { background-position: 0 0, 0 0; }
+    to { background-position: 0 64px, 64px 0; }
+}
+
+@keyframes sparkRise {
+    0% { transform: translate3d(0, 0, 0); opacity: 0; }
+    15% { opacity: 1; }
+    100% { transform: translate3d(var(--sx, 0), -260px, var(--sz, 0)); opacity: 0; }
 }
 
 /* Header Navbar - Invisible Bar Floating */
@@ -689,6 +721,46 @@ nav {
     height: 100%;
 }
 
+.screen-content img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transform: none;
+}
+
+.roadmap-screen-signup .screen-content img {
+    transform: translateY(14px);
+}
+
+.roadmap-screen-fund .screen-content img {
+    object-fit: contain;
+    object-position: center center;
+    transform: none;
+}
+
+.roadmap-screen-fund .screen-content img {
+    transform: translateY(20px);
+}
+
+.roadmap-screen-image-step3 .screen-content img {
+    object-fit: contain;
+    object-position: center center;
+    transform: translateY(15px);
+}
+
+.roadmap-screen-image-step3 .screen-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 36px;
+    z-index: 3;
+    background: #f8f9fa;
+}
+
 .glass-glare {
     position: absolute;
     inset: 0;
@@ -755,14 +827,68 @@ nav {
 
 .roadmap-phone-notch {
     position: absolute;
-    top: 16px;
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 92px;
-    height: 22px;
-    border-radius: 999px;
+    width: 42%;
+    height: 24px;
+    border-radius: 0 0 16px 16px;
     background: #050505;
     z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.roadmap-notch-speaker {
+    width: 30px;
+    height: 4px;
+    border-radius: 2px;
+    background: #181818;
+}
+
+.roadmap-notch-camera {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #181818;
+}
+
+.roadmap-statusbar {
+    position: absolute;
+    top: 1px;
+    left: 3px;
+    right: 3px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px 0 20px;
+    z-index: 2;
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1;
+}
+
+.roadmap-statusbar-time {
+    display: flex;
+    align-items: center;
+    height: 12px;
+    line-height: 12px;
+    transform: translateY(0.5px);
+}
+
+.roadmap-statusbar-icons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.roadmap-statusbar-icons svg {
+    display: block;
 }
 
 .roadmap-phone-screen {
@@ -804,16 +930,6 @@ nav {
     background: #f8fafc;
 }
 
-.roadmap-screen-image img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    transform: translateY(8px) scale(0.96);
-    transform-origin: center top;
-}
-
 .roadmap-screen-image::after {
     content: '';
     position: absolute;
@@ -829,29 +945,7 @@ nav {
     background: #f8fafc;
 }
 
-.roadmap-screen-fund img {
-    object-fit: fill;
-    object-position: center top;
-    transform: translateY(21px) scale(0.96) scaleX(1.04);
-}
-
 .roadmap-screen-fund::after {
-    content: none;
-}
-
-.roadmap-screen-image-step3 {
-    background: #ffffff;
-    box-shadow: inset 0 0 0 1px #ffffff;
-}
-
-.roadmap-screen-image-step3 img {
-    object-fit: fill;
-    object-position: center top;
-    filter: brightness(1.14) contrast(1.04) saturate(0.9);
-    transform: translateY(21px) scale(0.96) scaleX(1.04);
-}
-
-.roadmap-screen-image-step3::after {
     content: none;
 }
 
@@ -991,18 +1085,6 @@ footer {
     box-shadow: none;
 }
 
-.roadmap-phone-notch::after {
-    content: '';
-    position: absolute;
-    top: 7px;
-    right: 12px;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #51555c 0 18%, #111318 42%, #020202 75%);
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
-}
-
 .home-indicator {
     position: absolute;
     left: 50%;
@@ -1024,6 +1106,7 @@ footer {
 
 .roadmap-screen-image-step3 {
     background: #ffffff;
+    box-shadow: inset 0 0 0 1px #ffffff;
 }
 
 .roadmap-screen-header {
@@ -1133,6 +1216,22 @@ footer {
 
 .reveal-item:nth-child(3) {
     transition-delay: 240ms;
+}
+
+.roadmap-step.reveal-item .roadmap-phone {
+    opacity: 0;
+    transform: translateX(80px);
+    animation: none;
+    transition: opacity 900ms cubic-bezier(0.16, 1, 0.3, 1), transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.roadmap-step.reveal-item:nth-child(2) .roadmap-phone {
+    transform: translateX(-80px);
+}
+
+.roadmap-step.reveal-item.active .roadmap-phone {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 @keyframes floatPhone {
@@ -1363,6 +1462,8 @@ footer {
 }
 
 .download-content {
+    position: relative;
+    left: -55px;
     width: 100%;
     max-width: 1100px;
     display: flex;
@@ -1510,7 +1611,7 @@ footer {
 
 .ready-marquee {
     width: 100%;
-    max-width: 760px;
+    max-width: 1100px;
     overflow: hidden;
     padding: 0.25rem 0;
     mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
@@ -1685,12 +1786,17 @@ footer {
 }
 
 .footer-logo {
-    font-size: 1.8rem;
+    display: inline-flex;
+    align-items: center;
     color: #000000;
 }
 
-.footer-logo-text {
-    font-weight: 800;
+.footer-logo-img {
+    display: block;
+    max-width: 180px;
+    height: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
 }
 
 .footer-links-group {
@@ -1726,11 +1832,17 @@ footer {
 
 .footer-bottom {
     width: 100%;
-    border-top: 1px solid rgba(15, 23, 42, 0.08);
     padding-top: 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.footer-divider {
+    width: 100%;
+    height: 1px;
+    margin: 0;
+    background: rgba(15, 23, 42, 0.7);
 }
 
 .footer-copyright {
@@ -1882,11 +1994,19 @@ footer {
     border-top: 0 !important;
 }
 
+.footer-divider {
+    background: rgba(15, 23, 42, 0.82);
+}
+
 .footer-logo,
 .footer-links-title,
 .footer-link,
 .footer-copyright {
     color: var(--pantone-7546-c) !important;
+}
+
+.footer-logo-img {
+    filter: brightness(0) saturate(100%) invert(22%) sepia(11%) saturate(737%) hue-rotate(166deg) brightness(94%) contrast(92%) !important;
 }
 
 .process-section,
@@ -1911,6 +2031,25 @@ footer {
 
 .download-section {
     margin-top: 0 !important;
+}
+
+header.scrolled {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+header {
+    position: fixed !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background-color: transparent !important;
+}
+
+header.scrolled {
+    background-color: transparent !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 /* Cool Gray 4 C section surfaces with 298 C transitions. */
@@ -2074,14 +2213,6 @@ main:focus {
 }
 
 /* Plain brand hero and unified controls. */
-.hero-wrapper {
-    background: var(--pantone-7546-c) !important;
-}
-
-.hero-wrapper::before,
-.hero-wrapper::after {
-    display: none;
-}
 
 .btn,
 .btn-primary,

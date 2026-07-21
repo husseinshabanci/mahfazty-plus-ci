@@ -15,11 +15,18 @@
 <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <div class="hero-wrapper">
+        <div class="hero-scene" id="hero-scene" aria-hidden="true">
+            <div class="hero-ring-wrap" id="hero-ring-wrap">
+                <div class="hero-ring"></div>
+            </div>
+            <div class="hero-floor"></div>
+            <div class="hero-sparks" id="hero-sparks"></div>
+        </div>
         <header>
             <nav class="container" aria-label="Primary navigation">
                 <a href="#" class="logo" id="logo-anchor">
-                    <img src="" alt="Mahfazty CIBC Logo" id="logo-img" style="display: none; max-height: 40px; width: auto; object-fit: contain;">
-                    <span id="logo-text-span">MAHFAZTY CIBC</span>
+                    <img src="assets/logo-03.png" alt="Mahfazty CIBC Logo" id="logo-img" style="max-height: 40px; width: auto; object-fit: contain;">
+                    <span id="logo-text-span" style="display: none;">MAHFAZTY CIBC</span>
                 </a>
                 <ul class="nav-links" id="nav-links">
                     <!-- Dynamic Navigation Links -->
@@ -38,6 +45,7 @@
                 <h1 class="hero-title" id="hero-title">Stay in control when the market moves.</h1>
                 <p class="hero-subtitle" id="hero-desc">A focused investing experience for people at every stage, whether you are building confidence, staying active, or making faster decisions with clarity.</p>
                 <a href="#download" class="btn btn-primary btn-get-started" id="hero-btn-primary">Get Started</a>
+                <p class="hero-hint" id="hero-hint">Scroll to zoom through — tilt your cursor across the scene.</p>
             </section>
         </main>
     </div>
@@ -63,17 +71,30 @@
                     <div class="roadmap-phone" aria-hidden="true">
                         <div class="roadmap-phone-shadow"></div>
                         <div class="roadmap-phone-frame">
-                            <div class="roadmap-phone-notch"></div>
+                            <div class="roadmap-phone-notch">
+                                <span class="roadmap-notch-speaker"></span>
+                                <span class="roadmap-notch-camera"></span>
+                            </div>
                             <div class="roadmap-phone-button roadmap-phone-button-power"></div>
                             <div class="roadmap-phone-button roadmap-phone-button-camera"></div>
                             <div class="roadmap-phone-button roadmap-phone-button-action"></div>
                             <div class="roadmap-phone-button roadmap-phone-button-volume-up"></div>
                             <div class="roadmap-phone-button roadmap-phone-button-volume-down"></div>
                             <div class="roadmap-phone-screen roadmap-screen-signup roadmap-screen-image">
-                                <div class="screen-content"><img src="assets/step-1-login.jpeg" alt="Mahfazty login screen"></div>
-                                <div class="glass-glare"></div>
-                                <div class="home-indicator" aria-hidden="true"></div>
+                            <div class="roadmap-statusbar" aria-hidden="true">
+                                <span class="roadmap-statusbar-time">9:41</span>
+                                <div class="roadmap-statusbar-icons">
+                                    <svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="0.8" fill="#0f172a"/><rect x="4.7" y="5" width="3" height="6" rx="0.8" fill="#0f172a"/><rect x="9.4" y="3" width="3" height="8" rx="0.8" fill="#0f172a"/><rect x="14.1" y="0.5" width="3" height="10.5" rx="0.8" fill="#0f172a"/></svg>
+                                    <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M0.6 4.4C4.7 0.6 11.3 0.6 15.4 4.4L14 5.9C10.6 2.8 5.4 2.8 2 5.9L0.6 4.4Z" fill="#0f172a"/><path d="M3.4 7.3C5.8 5.1 10.2 5.1 12.6 7.3L11.2 8.8C9.4 7.2 6.6 7.2 4.8 8.8L3.4 7.3Z" fill="#0f172a"/><circle cx="8" cy="10.3" r="1.4" fill="#0f172a"/></svg>
+                                    <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3" stroke="#0f172a" stroke-opacity="0.35" fill="none"/><rect x="2" y="2" width="18" height="8" rx="2" fill="#0f172a"/><rect x="22.5" y="4" width="1.6" height="4" rx="0.8" fill="#0f172a" fill-opacity="0.4"/></svg>
+                                </div>
                             </div>
+                            <div class="screen-content">
+                                <img src="assets/step-1-login.jpeg" alt="Mahfazty login screen">
+                            </div>
+                            <div class="glass-glare"></div>
+                            <div class="home-indicator" aria-hidden="true"></div>
+                        </div>
                         </div>
                     </div>
                 </article>
@@ -88,17 +109,30 @@
                     <div class="roadmap-phone" aria-hidden="true">
                         <div class="roadmap-phone-shadow"></div>
                         <div class="roadmap-phone-frame">
-                            <div class="roadmap-phone-notch"></div>
+                            <div class="roadmap-phone-notch">
+                                <span class="roadmap-notch-speaker"></span>
+                                <span class="roadmap-notch-camera"></span>
+                            </div>
                             <div class="roadmap-phone-button roadmap-phone-button-power"></div>
                             <div class="roadmap-phone-button roadmap-phone-button-camera"></div>
                             <div class="roadmap-phone-button roadmap-phone-button-action"></div>
                             <div class="roadmap-phone-button roadmap-phone-button-volume-up"></div>
                             <div class="roadmap-phone-button roadmap-phone-button-volume-down"></div>
                             <div class="roadmap-phone-screen roadmap-screen-fund roadmap-screen-image">
-                                <div class="screen-content"><img src="assets/step-2-add-money.png" alt="Mahfazty add money screen"></div>
-                                <div class="glass-glare"></div>
-                                <div class="home-indicator" aria-hidden="true"></div>
+                            <div class="roadmap-statusbar" aria-hidden="true">
+                                <span class="roadmap-statusbar-time">9:41</span>
+                                <div class="roadmap-statusbar-icons">
+                                    <svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="0.8" fill="#0f172a"/><rect x="4.7" y="5" width="3" height="6" rx="0.8" fill="#0f172a"/><rect x="9.4" y="3" width="3" height="8" rx="0.8" fill="#0f172a"/><rect x="14.1" y="0.5" width="3" height="10.5" rx="0.8" fill="#0f172a"/></svg>
+                                    <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M0.6 4.4C4.7 0.6 11.3 0.6 15.4 4.4L14 5.9C10.6 2.8 5.4 2.8 2 5.9L0.6 4.4Z" fill="#0f172a"/><path d="M3.4 7.3C5.8 5.1 10.2 5.1 12.6 7.3L11.2 8.8C9.4 7.2 6.6 7.2 4.8 8.8L3.4 7.3Z" fill="#0f172a"/><circle cx="8" cy="10.3" r="1.4" fill="#0f172a"/></svg>
+                                    <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3" stroke="#0f172a" stroke-opacity="0.35" fill="none"/><rect x="2" y="2" width="18" height="8" rx="2" fill="#0f172a"/><rect x="22.5" y="4" width="1.6" height="4" rx="0.8" fill="#0f172a" fill-opacity="0.4"/></svg>
+                                </div>
                             </div>
+                            <div class="screen-content">
+                                <img src="assets/step-2-add-money.png" alt="Mahfazty add money screen">
+                            </div>
+                            <div class="glass-glare"></div>
+                            <div class="home-indicator" aria-hidden="true"></div>
+                        </div>
                         </div>
                     </div>
                 </article>
@@ -113,14 +147,27 @@
                     <div class="roadmap-phone" aria-hidden="true">
                         <div class="roadmap-phone-shadow"></div>
                         <div class="roadmap-phone-frame">
-                            <div class="roadmap-phone-notch"></div>
+                            <div class="roadmap-phone-notch">
+                                <span class="roadmap-notch-speaker"></span>
+                                <span class="roadmap-notch-camera"></span>
+                            </div>
                             <div class="roadmap-phone-button roadmap-phone-button-power"></div>
                             <div class="roadmap-phone-button roadmap-phone-button-camera"></div>
                             <div class="roadmap-phone-button roadmap-phone-button-action"></div>
                             <div class="roadmap-phone-button roadmap-phone-button-volume-up"></div>
                             <div class="roadmap-phone-button roadmap-phone-button-volume-down"></div>
                             <div class="roadmap-phone-screen roadmap-screen-invest roadmap-screen-image roadmap-screen-image-step3">
-                                <div class="screen-content"><img src="assets/step-3-market.png" alt="Mahfazty portfolio screen"></div>
+                                <div class="roadmap-statusbar" aria-hidden="true">
+                                    <span class="roadmap-statusbar-time">9:41</span>
+                                    <div class="roadmap-statusbar-icons">
+                                        <svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="0.8" fill="#0f172a"/><rect x="4.7" y="5" width="3" height="6" rx="0.8" fill="#0f172a"/><rect x="9.4" y="3" width="3" height="8" rx="0.8" fill="#0f172a"/><rect x="14.1" y="0.5" width="3" height="10.5" rx="0.8" fill="#0f172a"/></svg>
+                                        <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M0.6 4.4C4.7 0.6 11.3 0.6 15.4 4.4L14 5.9C10.6 2.8 5.4 2.8 2 5.9L0.6 4.4Z" fill="#0f172a"/><path d="M3.4 7.3C5.8 5.1 10.2 5.1 12.6 7.3L11.2 8.8C9.4 7.2 6.6 7.2 4.8 8.8L3.4 7.3Z" fill="#0f172a"/><circle cx="8" cy="10.3" r="1.4" fill="#0f172a"/></svg>
+                                        <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3" stroke="#0f172a" stroke-opacity="0.35" fill="none"/><rect x="2" y="2" width="18" height="8" rx="2" fill="#0f172a"/><rect x="22.5" y="4" width="1.6" height="4" rx="0.8" fill="#0f172a" fill-opacity="0.4"/></svg>
+                                    </div>
+                                </div>
+                                <div class="screen-content">
+                                    <img src="assets/step-3-market.png" alt="Mahfazty portfolio screen">
+                                </div>
                                 <div class="glass-glare"></div>
                                 <div class="home-indicator" aria-hidden="true"></div>
                             </div>
@@ -234,11 +281,13 @@
         </div>
     </section>
 
+    <div class="footer-divider" aria-hidden="true"></div>
+
     <footer class="footer-section fade-in-up">
         <div class="container footer-grid">
             <div class="footer-brand">
                 <a href="#" class="logo footer-logo">
-                    <span class="footer-logo-text">x</span>
+                    <img src="assets/logo-03.png" alt="Mahfazty CIBC Logo" class="footer-logo-img">
                 </a>
             </div>
             
@@ -262,9 +311,9 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="container footer-bottom">
-            <p class="footer-copyright">&copy; 2026 Mahfazty CIBC. All rights reserved.</p>
+            <p class="footer-copyright">All rights reserved - 2026 © Mahfazty PLUS</p>
         </div>
     </footer>
 
